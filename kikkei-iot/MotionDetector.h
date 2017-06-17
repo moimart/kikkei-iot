@@ -19,7 +19,7 @@ namespace iot
     void activate();
     void tick();
   private:
-    void connectToWifi(const char* ssid, const char* password);
+    void connectToWifi();
     int _pin_to_read { - 1 };
 
     Timer _led_timer;

@@ -2,11 +2,13 @@
 /* Author: Moises Martinez <moises@kikkei.com> */
 
 #include "MotionDetector.h"
+#include "Settings.h"
 
 kikkei::iot::MotionDetector::MotionDetector(const kikkei::iot::TimeCounter* counter)
 : _led_timer(1000,counter)
 , _read_timer(5000,counter)
 {
+
 }
 
 void kikkei::iot::MotionDetector::activate()
@@ -51,7 +53,7 @@ void kikkei::iot::MotionDetector::tick()
         Serial.println(_count++);
         _led_timer.activate();
         digitalWrite(LED_BUILTIN, LOW);
-        connectToWifi("Martinez","arahazamartinez");
+        connectToWifi();
       }
   }
 
@@ -59,11 +61,13 @@ void kikkei::iot::MotionDetector::tick()
   digitalWrite(LED_BUILTIN,(led_on) ? LOW : HIGH);
 }
 
-void kikkei::iot::MotionDetector::connectToWifi(const char* ssid, const char* password)
+void kikkei::iot::MotionDetector::connectToWifi()
 {
-  Serial.println("Connecting to Wifi");
+  Settings settings;
+  Serial.print("Connecting to Wifi with SSID ");
+  Serial.println(settings.getSSID());
 
-  WiFi.begin(ssid, password);
+  WiFi.begin(settings.getSSID(),settings.getPassword());
 
   while (WiFi.status() != WL_CONNECTED)
   {
