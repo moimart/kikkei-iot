@@ -51,7 +51,7 @@ void kikkei::iot::MotionDetector::tick()
         Serial.println(_count++);
         _led_timer.activate();
         digitalWrite(LED_BUILTIN, LOW);
-        connectToWifi("Martinez","arahazamartinez");
+        connectToWifi("xxxx","xxxx");
       }
   }
 
